@@ -29,25 +29,33 @@ const SelectLocation = () => {
       // console.log(response);
       return response;
     } catch (e) {
-      console.log("error fetching API", e);
+      console.log("error fetching API");
     }
   };
 
   const fetchState = async (selectedCountry) => {
-    let data = await axios.get(
-      `https://crio-location-selector.onrender.com/country=${selectedCountry}/states`
-    );
-    let response = await data.data;
-    return response;
+    try {
+      let data = await axios.get(
+        `https://crio-location-selector.onrender.com/country=${selectedCountry}/states`
+      );
+      let response = await data.data;
+      return response;
+    } catch (e) {
+      console.log("error fetching API");
+    }
     // console.log(response);
   };
 
   const fetchCity = async (selectedCounty, selectedState) => {
-    let data = await axios.get(
-      `https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`
-    );
-    let response = await data.data;
-    return response;
+    try {
+      let data = await axios.get(
+        `https://crio-location-selector.onrender.com/country=${selectedCountry}/state=${selectedState}/cities`
+      );
+      let response = await data.data;
+      return response;
+    } catch (e) {
+      console.log("error fetching API");
+    }
     // console.log(response);
   };
 
@@ -75,7 +83,7 @@ const SelectLocation = () => {
   //   }, [selectedState, selectedCountry]);
 
   useEffect(() => {
-    console.log("selected country useEffect");
+    // console.log("selected country useEffect");
     if (selectedCountry) {
       fetchState(selectedCountry).then((data) => setStates(data));
       setSelectedState("");
@@ -86,7 +94,7 @@ const SelectLocation = () => {
   //   console.log(Boolean(selectedState), selectedState);
 
   useEffect(() => {
-    console.log("selected state useEffect");
+    // console.log("selected state useEffect");
     if (selectedCountry && selectedState) {
       fetchCity(selectedCountry, selectedState).then((data) => setCities(data));
       setSelectedCity("");
