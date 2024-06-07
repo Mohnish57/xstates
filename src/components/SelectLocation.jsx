@@ -18,6 +18,7 @@ const SelectLocation = () => {
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
+
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -26,8 +27,14 @@ const SelectLocation = () => {
     try {
       let data = await axios.get(All_Countries_Endpoint);
       let response = await data.data;
-      // console.log(response);
-      return response;
+      let set = new Set();
+      response.forEach((country) => {
+        let removeSpacesFromcountry = country.trim();
+        set.add(removeSpacesFromcountry);
+      });
+      let uniqueData = [...set];
+      // console.log(uniqueData);
+      return uniqueData;
     } catch (e) {
       console.log("error fetching API");
     }
@@ -65,24 +72,27 @@ const SelectLocation = () => {
       .catch((e) => console.log(e));
   }, []);
 
-  //   useEffect(() => {
-  //     console.log("selected country useEffect");
-  //     if (selectedCountry) {
-  //       fetchState(selectedCountry).then((data) => setStates(data));
-  //       setSelectedState("");
-  //       setCities([]);
-  //       setSelectedCity("");
-  //     }
-  //   }, [selectedCountry]);
-  //   console.log(Boolean(selectedState), selectedState);
+  // useEffect(() => {
+  //   console.log("selected country useEffect");
+  //   if (selectedCountry) {
+  //     fetchState(selectedCountry).then((data) => setStates(data));
+  //     setStates([]);
+  //     setSelectedState("");
+  //     setCities([]);
+  //     setSelectedCity("");
+  //   }
+  // }, [selectedCountry]);
+  // console.log(Boolean(selectedState), selectedState);
 
-  //   useEffect(() => {
-  //     console.log("selected state useEffect");
-  //     if (selectedCountry && selectedState) {
-  //       fetchCity(selectedCountry, selectedState).then((data) => setCities(data));
-  //       setSelectedCity("");
-  //     }
-  //   }, [selectedState, selectedCountry]);
+  // useEffect(() => {
+  //   // setStates([]);
+  //   console.log(selectedState,selectedCountry)
+  //   console.log("selected state useEffect");
+  //   if (selectedCountry && selectedState) {
+  //     fetchCity(selectedCountry, selectedState).then((data) => setCities(data));
+  //     setSelectedCity("");
+  //   }
+  // }, [selectedState, selectedCountry]);
 
   useEffect(() => {
     // console.log("selected country useEffect");
@@ -145,7 +155,7 @@ const SelectLocation = () => {
             onChange={(e) => setSelectedCity(e.target.value)}
           >
             <option value="">Select City</option>
-            {selectedCountry
+            {selectedCountry && selectedState
               ? cities.map((city) => <option key={city}>{city}</option>)
               : null}
           </select>
