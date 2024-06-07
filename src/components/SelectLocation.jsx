@@ -27,13 +27,14 @@ const SelectLocation = () => {
     try {
       let data = await axios.get(All_Countries_Endpoint);
       let response = await data.data;
+      console.log(response.length);
       let set = new Set();
       response.forEach((country) => {
         let removeSpacesFromcountry = country.trim();
         set.add(removeSpacesFromcountry);
       });
       let uniqueData = [...set];
-      // console.log(uniqueData);
+      console.log(uniqueData.length);
       return uniqueData;
     } catch (e) {
       console.log("error fetching API");
@@ -129,9 +130,11 @@ const SelectLocation = () => {
             name="country"
           >
             <option value="">Select Country</option>
-            {countries.map((country) => (
-              <option key={country}>{country}</option>
-            ))}
+            {countries.length !== 0
+              ? countries.map((country) => (
+                  <option key={country}>{country}</option>
+                ))
+              : null}
           </select>
         </label>
         <label htmlFor="states">
