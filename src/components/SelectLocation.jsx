@@ -60,7 +60,9 @@ const SelectLocation = () => {
   };
 
   useEffect(() => {
-    fetchCountries().then((data) => setCountries(data));
+    fetchCountries()
+      .then((data) => setCountries(data))
+      .catch((e) => console.log(e));
   }, []);
 
   //   useEffect(() => {
@@ -85,7 +87,9 @@ const SelectLocation = () => {
   useEffect(() => {
     // console.log("selected country useEffect");
     if (selectedCountry) {
-      fetchState(selectedCountry).then((data) => setStates(data));
+      fetchState(selectedCountry)
+        .then((data) => setStates(data))
+        .catch((e) => console.log(e));
       setSelectedState("");
       setCities([]);
       setSelectedCity("");
@@ -96,7 +100,9 @@ const SelectLocation = () => {
   useEffect(() => {
     // console.log("selected state useEffect");
     if (selectedCountry && selectedState) {
-      fetchCity(selectedCountry, selectedState).then((data) => setCities(data));
+      fetchCity(selectedCountry, selectedState)
+        .then((data) => setCities(data))
+        .catch((e) => console.log(e));
       setSelectedCity("");
     }
   }, [selectedState]);
