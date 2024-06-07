@@ -118,7 +118,9 @@ const SelectLocation = () => {
             }}
             name="country"
           >
-            <option value="">Select Country</option>
+            <option value="" diabled>
+              Select Country
+            </option>
             {countries.map((country) => (
               <option key={country}>{country}</option>
             ))}
@@ -132,7 +134,9 @@ const SelectLocation = () => {
               setSelectedState(e.target.value);
             }}
           >
-            <option value="">Select State</option>
+            <option value="" disabled>
+              Select State
+            </option>
             {selectedCountry
               ? states.map((state) => <option key={state}>{state}</option>)
               : null}
@@ -144,7 +148,9 @@ const SelectLocation = () => {
             name="cities"
             onChange={(e) => setSelectedCity(e.target.value)}
           >
-            <option value="">Select City</option>
+            <option value="" disabled>
+              Select City
+            </option>
             {selectedCountry
               ? cities.map((city) => <option key={city}>{city}</option>)
               : null}
