@@ -154,9 +154,9 @@ const SelectLocation = () => {
       {selectedCity ? (
         <>
           <h3>
-            You have Selected <span className="city">{selectedCity},</span>
+            You selected <span className="city">{selectedCity}, </span>
             <span className="state">
-              {selectedState},{selectedCountry}
+              {selectedState}, {selectedCountry}
             </span>
           </h3>
         </>
