@@ -146,7 +146,7 @@ const SelectLocation = () => {
             }}
           >
             <option value="">Select State</option>
-            {selectedCountry
+            {selectedCountry && states.length !== 0
               ? states.map((state) => <option key={state}>{state}</option>)
               : null}
           </select>
