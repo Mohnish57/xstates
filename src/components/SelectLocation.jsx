@@ -118,7 +118,7 @@ const SelectLocation = () => {
             }}
             name="country"
           >
-            <option value="" diabled>
+            <option value="" disabled>
               Select Country
             </option>
             {countries.map((country) => (
